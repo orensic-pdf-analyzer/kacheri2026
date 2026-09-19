@@ -126,32 +126,32 @@
 <div class="container">
     <div class="header">
         <h1>કચેરી કાર્યપદ્ધતિ મેનેજમેન્ટ સિસ્ટમ</h1>
-        <p>(અનુક્રમણિકાના તમામ ૧૮ પ્રકરણોને આવરી લેતી ઓટોમેટીક નોંધ સિસ્ટમ)</p>
+        <p>(નામ-સરનામું લખી પ્રકરણ સિલેક્ટ કરતા જ ઓટોમેટીક નોંધ બનશે)</p>
     </div>
 
-    <!-- અરજદાર/કર્મચારીની વિગતો -->
+    <!-- ૧. વિગતો ભરવાનું ફોર્મ -->
     <div class="form-group">
         <label for="applicantName">અરજદારશ્રી / સંબંધિત કર્મચારીનું નામ:</label>
-        <input type="text" id="applicantName" placeholder="નામ લખો..." oninput="generateNote()">
+        <input type="text" id="applicantName" placeholder="અહીં પૂરું નામ લખો..." oninput="generateNote()">
     </div>
 
     <div class="form-group">
         <label for="applicantAddress">અરજદારનું સરનામું / કર્મચારીનો હોદ્દો:</label>
-        <input type="text" id="applicantAddress" placeholder="સરનામું અથવા હોદ્દો લખો..." oninput="generateNote()">
+        <input type="text" id="applicantAddress" placeholder="અહીં પૂરું સરનામું અથવા હોદ્દો લખો..." oninput="generateNote()">
     </div>
 
-    <!-- અનુક્રમણિકા મુજબ તમામ ૧૮ પ્રકરણોની પસંદગી -->
+    <!-- ૨. પ્રકરણ સિલેક્શન મેનૂ -->
     <div class="form-group">
-        <label for="subjectSelect">કચેરી કાર્યપદ્ધતિ પ્રકરણ (વિષય) પસંદ કરો:</label>
+        <label for="subjectSelect">કચેરી કાર્યપદ્ધતિનું પ્રકરણ પસંદ કરો:</label>
         <select id="subjectSelect" onchange="generateNote()">
-            <option value="">-- કૃપા કરીને વિષય/પ્રકરણ પસંદ કરો --</option>
+            <option value="">-- કૃપા કરીને પ્રકરણ પસંદ કરો --</option>
             <option value="ch1">પ્રકરણ ૧: ઇ-ગવર્નન્સ (GSWAN, પોર્ટલ અને Unicode ફોન્ટ)</option>
             <option value="ch2">પ્રકરણ ૨: મહેકમ અને કચેરીને લગતી બાબતો (સમય અને ફરજો)</option>
             <option value="ch3">પ્રકરણ ૩: ટપાલનો સ્વીકાર, નોંધણી તથા વહેંચણી (રજિસ્ટ્રી શાખા)</option>
             <option value="ch4">પ્રકરણ ૪: શાખામાં આવેલ ટપાલ અંગે કાર્યવાહી અને દફતર વ્યવસ્થા</option>
             <option value="ch5">પ્રકરણ ૫: લખાણની જાવક (RPAD, સ્પીડ પોસ્ટ અને રવાનગી)</option>
             <option value="ch6">પ્રકરણ ૬: ફાઇલની જાળવણી અને તેમને નંબરો આપવા બાબત</option>
-            <option value="ch7">પ્રકરણ ૭: રેકર્ડ વર્ગીકરણ (અ, બ, ક, ડ વર્ગ અને નાશ કરવાની પ્રક્રિયા)</option>
+            <option value="ch7">પ્રકરણ ૭: રેકર્ડ વર્ગીકરણ (અ, બ, ક, ડ વર્ગ પ્રક્રિયા)</option>
             <option value="ch8">પ્રકરણ ૮: વિલંબ પર નિયંત્રણ (પડતર તુમાર અને મોનિટરીંગ)</option>
             <option value="ch9">પ્રકરણ ૯: નોંધ લેખન અને મુસદ્દા લેખન (Level Jumping નિવારણ)</option>
             <option value="ch10">પ્રકરણ ૧૦: લખાણના પ્રકાર (પરિપત્ર, જાહેરનામું, અર્ધસરકારી પત્ર)</option>
@@ -160,16 +160,16 @@
             <option value="ch13">પ્રકરણ ૧૩: કચેરી કામકાજની અન્ય બાબતો</option>
             <option value="ch14">પ્રકરણ ૧૪: કોર્ટ કેસ અને સંસદસભ્યશ્રી / ધારાસભ્યશ્રીના પત્ર અંગેની કાર્યવાહી</option>
             <option value="ch15">પ્રકરણ ૧૫: માહિતીનો અધિકાર અધિનિયમ-૨૦૦૫ (RTI પ્રક્રિયા)</option>
-            <option value="ch16">પ્રકરણ ૧૬: ગુજરાત (જાહેર સેવાઓ અંગે નાગરિકોનો અધિકાર) અધિનિયમ-૨૦૧૩</option>
+            <option value="ch16">પ્રકરણ ૧运行: ગુજરાત (જાહેર સેવાઓ અંગે નાગરિકોનો અધિકાર) અધિનિયમ-૨૦૧૩</option>
             <option value="ch17">પ્રકરણ ૧૭: વાર્ષિક વહીવટી અહેવાલ (પ્રગતિ આલેખન)</option>
             <option value="ch18">પ્રકરણ ૧૮: પ્રકીર્ણ બાબતો અને કચેરી શિસ્ત</option>
         </select>
     </div>
 
-    <!-- ઓટોમેટીક ટાઈપ થતી નોંધ -->
+    <!-- ૩. ઓટોમેટીક બનતી લાઈવ નોંધ -->
     <div class="form-group">
         <label for="autoNoteContent">તૈયાર થયેલ સત્તાવાર કચેરી નોંધ (એડિટ કરી શકાય તેવી):</label>
-        <textarea id="autoNoteContent" rows="12" placeholder="ઉપરની વિગતો ભરતા જ સત્તાવાર ભાષામાં નોંધ અહીં આપોઆપ ટાઈપ થઈ જશે..."></textarea>
+        <textarea id="autoNoteContent" rows="12" placeholder="ઉપર નામ-સરનામું લખી પ્રકરણ પસંદ કરતા જ નોંધ અહીં આપોઆપ બની જશે..."></textarea>
     </div>
 
     <div class="btn-container">
@@ -177,7 +177,7 @@
         <button class="btn-secondary" onclick="resetForm()">ફોર્મ ક્લિયર કરો</button>
     </div>
 
-    <!-- લાઈવ પ્રિવ્યૂ બોક્સ -->
+    <!-- ૪. પ્રિન્ટ/ઓફિસ રેકર્ડ પ્રિવ્યૂ -->
     <div id="outputBox" class="output-box">
         <div class="output-title">કચેરી રેકર્ડ માટે સત્તાવાર નોંધ પ્રિવ્યૂ</div>
         <div id="notePreview" class="note-preview"></div>
@@ -185,7 +185,7 @@
 </div>
 
 <script>
-    // ૧૮ પ્રકરણોના સત્તાવાર નોંધના ઢાંચા (Templates)
+    // તમામ ૧૮ પ્રકરણોના સત્તાવાર ટેમ્પલેટ્સ
     const noteTemplates = {
         ch1: `વિષય: ઇ-ગવર્નન્સ અંતર્ગત ડિજિટલ પ્લેટફોર્મ અને Unicode ફોન્ટના ઉપયોગ બાબત.\n\nકચેરી વડાશ્રી,\n\nકચેરી કાર્યપદ્ધતિના પ્રકરણ-૧ ના નિયમોનુસાર, તમામ રોજિંદી સરકારી કામગીરી ઈ-ટપાલ અને ઈ-ફાઈલિંગ માધ્યમથી પેપરલેસ કરવા સૂચના છે. {NAME} ({ADDRESS}) ની અરજી/નોંધ સંબંધિત ઓનલાઈન પોર્ટલ પર અપલોડ કરી, સત્તાવાર નોંધ અને પત્ર વ્યવહાર માટે માત્ર Unicode ફોન્ટનો ઉપયોગ કરી આગળની પ્રક્રિયા કરવા મંજૂરી અર્થે પ્રસ્તુત છે.`,
         
