@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>કચેરી કાર્યપદ્ધતિ - ઓટોમેટીક નોંધ સિસ્ટમ</title>
+    <style>
+        :root {
+            --primary-color: #a8206d;
+            --secondary-color: #f7e6f0;
+            --text-color: #333;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+            color: var(--text-color);
+        }
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-top: 5px solid var(--primary-color);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        .header h1 {
+            color: var(--primary-color);
+            margin: 5px 0;
+            font-size: 24px;
+        }
+        .header p {
+            margin: 5px 0;
+            color: #666;
+            font-weight: bold;
+        }
+        .form-group {
+            margin-bottom: 18px;
+        }
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: 600;
+            color: #444;
+        }
+        input[type="text"], select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 15px;
+        }
+        input[type="text"]:focus, select:focus, textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 5px rgba(168, 32, 109, 0.2);
+        }
+        .btn-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #8c1a5b;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+        .output-box {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: var(--secondary-color);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 4px;
+            display: none;
+        }
+        .output-title {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 18px;
+            border-bottom: 1px solid var(--primary-color);
+            padding-bottom: 5px;
+        }
+        .note-preview {
+            white-space: pre-wrap;
+            line-height: 1.6;
+            background: #fff;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>કચેરી કાર્યપદ્ધતિ મેનેજમેન્ટ સિસ્ટમ</h1>
+        <p>(ગુજરાત સરકારના નિયમોનુસાર ઓટોમેટીક નોંધ જનરેટર)</p>
+    </div>
+
+    <!-- અરજદારની વિગતો -->
+    <div class="form-group">
+        <label for="applicantName">અરજદારશ્રીનું નામ:</label>
+        <input type="text" id="applicantName" placeholder="અરજદારનું પૂરું નામ લખો..." oninput="generateNote()">
+    </div>
+
+    <div class="form-group">
+        <label for="applicantAddress">અરજદારશ્રીનું સરનામું:</label>
+        <input type="text" id="applicantAddress" placeholder="અરજદારનું પૂરું સરનામું લખો..." oninput="generateNote()">
+    </div>
+
+    <!-- વિષય પસંદગી (અહીંથી ઓટોમેટીક ટાઈપ થશે) -->
+    <div class="form-group">
+        <label for="subjectSelect">નોંધનો વિષય પસંદ કરો:</label>
+        <select id="subjectSelect" onchange="generateNote()">
+            <option value="">-- કૃપા કરીને વિષય પસંદ કરો --</option>
+            <option value="leave">૧. પ્રાસંગિક રજા (C.L.) મંજૂર કરવા બાબત</option>
+            <option value="inward">૨. નવી આવેલ ટપાલ ઇનવર્ડ રજિસ્ટરે નોંધવા બાબત</option>
+            <option value="movement">૩. કચેરી સમય દરમિયાન અલ્પાહાર/સરકારી કામે બહાર જવા બાબત (અવર-જવર પત્રક)</option>
+            <option value="file_movement">૪. ફાઇલ નિર્ણય અર્થે ઉપરી અધિકારીશ્રી સમક્ષ રજૂ કરવા બાબત</option>
+        </select>
+    </div>
+
+    <!-- આપોઆપ તૈયાર થતી વિગતવાર નોંધ -->
+    <div class="form-group">
+        <label for="autoNoteContent">તૈયાર થયેલ સત્તાવાર નોંધ (એડિટ કરી શકાય તેવી):</label>
+        <textarea id="autoNoteContent" rows="10" placeholder="ઉપરની વિગતો ભરતા જ નોંધ અહીં આપોઆપ ટાઈપ થઈ જશે..."></textarea>
+    </div>
+
+    <div class="btn-container">
+        <button class="btn-primary" onclick="copyToClipboard()">નોંધ કોપી કરો</button>
+        <button class="btn-secondary" onclick="resetForm()">ફોર્મ સાફ કરો</button>
+    </div>
+
+    <!-- પ્રિન્ટ પ્રિવ્યૂ બોક્સ -->
+    <div id="outputBox" class="output-box">
+        <div class="output-title">કચેરી કામકાજ માટે સત્તાવાર નોંધ પ્રિવ્યૂ</div>
+        <div id="notePreview" class="note-preview"></div>
+    </div>
+</div>
+
+<script>
+    // વિષય વાઈઝ ઓટોમેટીક નોંધના ઢાંચા (Templates)
+    const noteTemplates = {
+        leave: `વિષય: પ્રાસંગિક રજા (C.L.) મંજૂર કરવા બાબત.\n\nઆદરણીય સાહેબશ્રી,\n\nઉપરોક્ત વિષય અન્વયે સવિનય જણાવવાનું કે અરજદારશ્રી {NAME}, સરનામું: {ADDRESS} દ્વારા તેઓની અંગત અનિવાર્ય કામગીરી સબબ પ્રાસંગિક રજા મંજૂર કરવા માટે કચેરી કાર્યપદ્ધતિના નિયમ-૧૪ અનુસાર સી.એલ. કાર્ડ સાથે અરજી રજૂ કરેલ છે.\n\nસાહેબશ્રીની મંજૂરી અર્થે સવિનય રજૂ.`,
+        
+        inward: `વિષય: નવી આવેલ ટપાલ આવક રજિસ્ટરે (પરિશિષ્ટ-૧) નોંધવા બાબત.\n\nશાખા વડાશ્રી,\n\nકચેરીમાં અરજદારશ્રી {NAME}, સરનામું: {ADDRESS} તરફથી સત્તાવાર પત્ર/અરજી મળેલ છે. કચેરી કાર્યપદ્ધતિના પ્રકરણ-૩ (નિયમ-૨૭) મુજબ સદર ટપાલને ઇનવર્ડ નંબર આપી, સિકકો મારી આગળની જરૂરી કાર્યવાહી અર્થે સંબંધિત શાખાના કારકુન તરફ મોકલવા મંજૂરી અર્થે સાદર રજૂ.`,
+        
+        movement: `વિષય: અવર-જવર પત્રકમાં (Movement Register) નોંધ કરવા બાબત.\n\nકચેરી અધિક્ષકશ્રી,\n\nકચેરી કાર્યપદ્ધતિના પ્રકરણ-૨ (નિયમ-૧૩) અનુસાર, અરજદારશ્રી/કર્મચારીશ્રી {NAME}, સરનામું: {ADDRESS} સરકારી કામકાજ અથવા અલ્પાહારના નિયત સમય (૧૫ થી ૨૦ મિનિટ) માટે કચેરી બહાર જતા હોઈ, તેઓની અવર-જવર રજિસ્ટરમાં બેઠક છોડ્યા સમયની નોંધ કરવા સવિનય પ્રસ્તુત છે.`,
+        
+        file_movement: `વિષય: ફાઇલ નિર્ણય અર્થે ઉપરી અધિકારીશ્રી સમક્ષ રજૂ કરવા બાબત.\n\nઉચ્ચ અધિકારીશ્રી,\n\nઅરજદારશ્રી {NAME}, સરનામું: {ADDRESS} ની પડતર અરજી અંગેનો વિગતવાર અહેવાલ અને જરૂરી દસ્તાવેજો કચેરી કાર્યપદ્ધતિ પ્રકરણ-૧ (ઇ-ગવર્નન્સ અને કચેરી વ્યવસ્થાપન) ના નિયમોનુસાર ઇ-ફાઇલ માધ્યમથી તૈયાર કરવામાં આવેલ છે. સદર બાબતે યોગ્ય નિર્ણય અને આખરી આદેશ અર્થે ફાઇલ સાદર રજૂ છે.`
+    };
+
+    function generateNote() {
+        const name = document.getElementById('applicantName').value || '[અરજદારનું નામ]';
+        const address = document.getElementById('applicantAddress').value || '[અરજદારનું સરનામું]';
+        const selectedSubject = document.getElementById('subjectSelect').value;
+        const noteTextarea = document.getElementById('autoNoteContent');
+        const outputBox = document.getElementById('outputBox');
+        const notePreview = document.getElementById('notePreview');
+
+        if (!selectedSubject) {
+            noteTextarea.value = "કૃપા કરીને ઉપરથી નોંધનો વિષય પસંદ કરો જેથી અહીં ઓટોમેટીક લખાણ ટાઈપ થઈ શકે.";
+            outputBox.style.display = "none";
+            return;
+        }
+
+        // ટેમ્પલેટમાંથી ડેટા રિપ્લેસ કરવો
+        let noteText = noteTemplates[selectedSubject];
+        noteText = noteText.replace(/{NAME}/g, name).replace(/{ADDRESS}/g, address);
+
+        // ટેક્સ્ટ એરિયા અને પ્રિવ્યૂમાં લખાણ સેટ કરવું
+        noteTextarea.value = noteText;
+        notePreview.innerText = noteText;
+        outputBox.style.display = "block";
+    }
+
+    function copyToClipboard() {
+        const noteTextarea = document.getElementById('autoNoteContent');
+        noteTextarea.select();
+        document.execCommand('copy');
+        alert('નોંધ સફળતાપૂર્વક કોપી થઈ ગઈ છે! તમે તેને ગમે ત્યાં પેસ્ટ (Ctrl+V) કરી શકો છો.');
+    }
+
+    function resetForm() {
+        document.getElementById('applicantName').value = '';
+        document.getElementById('applicantAddress').value = '';
+        document.getElementById('subjectSelect').value = '';
+        document.getElementById('autoNoteContent').value = '';
+        document.getElementById('outputBox').style.display = "none";
+    }
+</script>
+
+</body>
+</html>
