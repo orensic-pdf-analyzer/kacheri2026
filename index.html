@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>કચેરી કાર્યપદ્ધતિ - ઓટોમેટીક નોંધ સિસ્ટમ</title>
+    <title>કચેરી કાર્યપદ્ધતિ - ઓટોમેટીક ૧૮ પ્રકરણ નોંધ સિસ્ટમ</title>
     <style>
         :root {
             --primary-color: #a8206d;
@@ -12,19 +12,19 @@
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f9f9f9;
+            background-color: #f4f5f7;
             margin: 0;
             padding: 20px;
             color: var(--text-color);
         }
         .container {
-            max-width: 850px;
+            max-width: 900px;
             margin: 0 auto;
             background: #fff;
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border-top: 5px solid var(--primary-color);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-top: 6px solid var(--primary-color);
         }
         .header {
             text-align: center;
@@ -35,25 +35,26 @@
         .header h1 {
             color: var(--primary-color);
             margin: 5px 0;
-            font-size: 24px;
+            font-size: 26px;
         }
         .header p {
             margin: 5px 0;
-            color: #666;
+            color: #555;
             font-weight: bold;
+            font-size: 15px;
         }
         .form-group {
-            margin-bottom: 18px;
+            margin-bottom: 20px;
         }
         label {
             display: block;
-            margin-bottom: 7px;
+            margin-bottom: 8px;
             font-weight: 600;
             color: #444;
         }
         input[type="text"], select, textarea {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             border: 1px solid #ccc;
             border-radius: 4px;
             box-sizing: border-box;
@@ -62,16 +63,16 @@
         input[type="text"]:focus, select:focus, textarea:focus {
             border-color: var(--primary-color);
             outline: none;
-            box-shadow: 0 0 5px rgba(168, 32, 109, 0.2);
+            box-shadow: 0 0 6px rgba(168, 32, 109, 0.25);
         }
         .btn-container {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             margin-top: 20px;
         }
         button {
             flex: 1;
-            padding: 12px;
+            padding: 14px;
             border: none;
             border-radius: 4px;
             font-size: 16px;
@@ -104,18 +105,19 @@
         .output-title {
             font-weight: bold;
             color: var(--primary-color);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             font-size: 18px;
             border-bottom: 1px solid var(--primary-color);
-            padding-bottom: 5px;
+            padding-bottom: 6px;
         }
         .note-preview {
             white-space: pre-wrap;
             line-height: 1.6;
             background: #fff;
-            padding: 15px;
+            padding: 18px;
             border: 1px solid #ddd;
             border-radius: 4px;
+            font-size: 15px;
         }
     </style>
 </head>
@@ -124,101 +126,78 @@
 <div class="container">
     <div class="header">
         <h1>કચેરી કાર્યપદ્ધતિ મેનેજમેન્ટ સિસ્ટમ</h1>
-        <p>(ગુજરાત સરકારના નિયમોનુસાર ઓટોમેટીક નોંધ જનરેટર)</p>
+        <p>(અનુક્રમણિકાના તમામ ૧૮ પ્રકરણોને આવરી લેતી ઓટોમેટીક નોંધ સિસ્ટમ)</p>
     </div>
 
-    <!-- અરજદારની વિગતો -->
+    <!-- અરજદાર/કર્મચારીની વિગતો -->
     <div class="form-group">
-        <label for="applicantName">અરજદારશ્રીનું નામ:</label>
-        <input type="text" id="applicantName" placeholder="અરજદારનું પૂરું નામ લખો..." oninput="generateNote()">
+        <label for="applicantName">અરજદારશ્રી / સંબંધિત કર્મચારીનું નામ:</label>
+        <input type="text" id="applicantName" placeholder="નામ લખો..." oninput="generateNote()">
     </div>
 
     <div class="form-group">
-        <label for="applicantAddress">અરજદારશ્રીનું સરનામું:</label>
-        <input type="text" id="applicantAddress" placeholder="અરજદારનું પૂરું સરનામું લખો..." oninput="generateNote()">
+        <label for="applicantAddress">અરજદારનું સરનામું / કર્મચારીનો હોદ્દો:</label>
+        <input type="text" id="applicantAddress" placeholder="સરનામું અથવા હોદ્દો લખો..." oninput="generateNote()">
     </div>
 
-    <!-- વિષય પસંદગી (અહીંથી ઓટોમેટીક ટાઈપ થશે) -->
+    <!-- અનુક્રમણિકા મુજબ તમામ ૧૮ પ્રકરણોની પસંદગી -->
     <div class="form-group">
-        <label for="subjectSelect">નોંધનો વિષય પસંદ કરો:</label>
+        <label for="subjectSelect">કચેરી કાર્યપદ્ધતિ પ્રકરણ (વિષય) પસંદ કરો:</label>
         <select id="subjectSelect" onchange="generateNote()">
-            <option value="">-- કૃપા કરીને વિષય પસંદ કરો --</option>
-            <option value="leave">૧. પ્રાસંગિક રજા (C.L.) મંજૂર કરવા બાબત</option>
-            <option value="inward">૨. નવી આવેલ ટપાલ ઇનવર્ડ રજિસ્ટરે નોંધવા બાબત</option>
-            <option value="movement">૩. કચેરી સમય દરમિયાન અલ્પાહાર/સરકારી કામે બહાર જવા બાબત (અવર-જવર પત્રક)</option>
-            <option value="file_movement">૪. ફાઇલ નિર્ણય અર્થે ઉપરી અધિકારીશ્રી સમક્ષ રજૂ કરવા બાબત</option>
+            <option value="">-- કૃપા કરીને વિષય/પ્રકરણ પસંદ કરો --</option>
+            <option value="ch1">પ્રકરણ ૧: ઇ-ગવર્નન્સ (GSWAN, પોર્ટલ અને Unicode ફોન્ટ)</option>
+            <option value="ch2">પ્રકરણ ૨: મહેકમ અને કચેરીને લગતી બાબતો (સમય અને ફરજો)</option>
+            <option value="ch3">પ્રકરણ ૩: ટપાલનો સ્વીકાર, નોંધણી તથા વહેંચણી (રજિસ્ટ્રી શાખા)</option>
+            <option value="ch4">પ્રકરણ ૪: શાખામાં આવેલ ટપાલ અંગે કાર્યવાહી અને દફતર વ્યવસ્થા</option>
+            <option value="ch5">પ્રકરણ ૫: લખાણની જાવક (RPAD, સ્પીડ પોસ્ટ અને રવાનગી)</option>
+            <option value="ch6">પ્રકરણ ૬: ફાઇલની જાળવણી અને તેમને નંબરો આપવા બાબત</option>
+            <option value="ch7">પ્રકરણ ૭: રેકર્ડ વર્ગીકરણ (અ, બ, ક, ડ વર્ગ અને નાશ કરવાની પ્રક્રિયા)</option>
+            <option value="ch8">પ્રકરણ ૮: વિલંબ પર નિયંત્રણ (પડતર તુમાર અને મોનિટરીંગ)</option>
+            <option value="ch9">પ્રકરણ ૯: નોંધ લેખન અને મુસદ્દા લેખન (Level Jumping નિવારણ)</option>
+            <option value="ch10">પ્રકરણ ૧૦: લખાણના પ્રકાર (પરિપત્ર, જાહેરનામું, અર્ધસરકારી પત્ર)</option>
+            <option value="ch11">પ્રકરણ ૧૧: અરજીના નિયમો (નાગરિકોની રજૂઆતો અંગે)</option>
+            <option value="ch12">પ્રકરણ ૧૨: નિરીક્ષણ (કચેરી અને દફતર નિરીક્ષણ ફોર્મ)</option>
+            <option value="ch13">પ્રકરણ ૧૩: કચેરી કામકાજની અન્ય બાબતો</option>
+            <option value="ch14">પ્રકરણ ૧૪: કોર્ટ કેસ અને સંસદસભ્યશ્રી / ધારાસભ્યશ્રીના પત્ર અંગેની કાર્યવાહી</option>
+            <option value="ch15">પ્રકરણ ૧૫: માહિતીનો અધિકાર અધિનિયમ-૨૦૦૫ (RTI પ્રક્રિયા)</option>
+            <option value="ch16">પ્રકરણ ૧૬: ગુજરાત (જાહેર સેવાઓ અંગે નાગરિકોનો અધિકાર) અધિનિયમ-૨૦૧૩</option>
+            <option value="ch17">પ્રકરણ ૧૭: વાર્ષિક વહીવટી અહેવાલ (પ્રગતિ આલેખન)</option>
+            <option value="ch18">પ્રકરણ ૧૮: પ્રકીર્ણ બાબતો અને કચેરી શિસ્ત</option>
         </select>
     </div>
 
-    <!-- આપોઆપ તૈયાર થતી વિગતવાર નોંધ -->
+    <!-- ઓટોમેટીક ટાઈપ થતી નોંધ -->
     <div class="form-group">
-        <label for="autoNoteContent">તૈયાર થયેલ સત્તાવાર નોંધ (એડિટ કરી શકાય તેવી):</label>
-        <textarea id="autoNoteContent" rows="10" placeholder="ઉપરની વિગતો ભરતા જ નોંધ અહીં આપોઆપ ટાઈપ થઈ જશે..."></textarea>
+        <label for="autoNoteContent">તૈયાર થયેલ સત્તાવાર કચેરી નોંધ (એડિટ કરી શકાય તેવી):</label>
+        <textarea id="autoNoteContent" rows="12" placeholder="ઉપરની વિગતો ભરતા જ સત્તાવાર ભાષામાં નોંધ અહીં આપોઆપ ટાઈપ થઈ જશે..."></textarea>
     </div>
 
     <div class="btn-container">
         <button class="btn-primary" onclick="copyToClipboard()">નોંધ કોપી કરો</button>
-        <button class="btn-secondary" onclick="resetForm()">ફોર્મ સાફ કરો</button>
+        <button class="btn-secondary" onclick="resetForm()">ફોર્મ ક્લિયર કરો</button>
     </div>
 
-    <!-- પ્રિન્ટ પ્રિવ્યૂ બોક્સ -->
+    <!-- લાઈવ પ્રિવ્યૂ બોક્સ -->
     <div id="outputBox" class="output-box">
-        <div class="output-title">કચેરી કામકાજ માટે સત્તાવાર નોંધ પ્રિવ્યૂ</div>
+        <div class="output-title">કચેરી રેકર્ડ માટે સત્તાવાર નોંધ પ્રિવ્યૂ</div>
         <div id="notePreview" class="note-preview"></div>
     </div>
 </div>
 
 <script>
-    // વિષય વાઈઝ ઓટોમેટીક નોંધના ઢાંચા (Templates)
+    // ૧૮ પ્રકરણોના સત્તાવાર નોંધના ઢાંચા (Templates)
     const noteTemplates = {
-        leave: `વિષય: પ્રાસંગિક રજા (C.L.) મંજૂર કરવા બાબત.\n\nઆદરણીય સાહેબશ્રી,\n\nઉપરોક્ત વિષય અન્વયે સવિનય જણાવવાનું કે અરજદારશ્રી {NAME}, સરનામું: {ADDRESS} દ્વારા તેઓની અંગત અનિવાર્ય કામગીરી સબબ પ્રાસંગિક રજા મંજૂર કરવા માટે કચેરી કાર્યપદ્ધતિના નિયમ-૧૪ અનુસાર સી.એલ. કાર્ડ સાથે અરજી રજૂ કરેલ છે.\n\nસાહેબશ્રીની મંજૂરી અર્થે સવિનય રજૂ.`,
+        ch1: `વિષય: ઇ-ગવર્નન્સ અંતર્ગત ડિજિટલ પ્લેટફોર્મ અને Unicode ફોન્ટના ઉપયોગ બાબત.\n\nકચેરી વડાશ્રી,\n\nકચેરી કાર્યપદ્ધતિના પ્રકરણ-૧ ના નિયમોનુસાર, તમામ રોજિંદી સરકારી કામગીરી ઈ-ટપાલ અને ઈ-ફાઈલિંગ માધ્યમથી પેપરલેસ કરવા સૂચના છે. {NAME} ({ADDRESS}) ની અરજી/નોંધ સંબંધિત ઓનલાઈન પોર્ટલ પર અપલોડ કરી, સત્તાવાર નોંધ અને પત્ર વ્યવહાર માટે માત્ર Unicode ફોન્ટનો ઉપયોગ કરી આગળની પ્રક્રિયા કરવા મંજૂરી અર્થે પ્રસ્તુત છે.`,
         
-        inward: `વિષય: નવી આવેલ ટપાલ આવક રજિસ્ટરે (પરિશિષ્ટ-૧) નોંધવા બાબત.\n\nશાખા વડાશ્રી,\n\nકચેરીમાં અરજદારશ્રી {NAME}, સરનામું: {ADDRESS} તરફથી સત્તાવાર પત્ર/અરજી મળેલ છે. કચેરી કાર્યપદ્ધતિના પ્રકરણ-૩ (નિયમ-૨૭) મુજબ સદર ટપાલને ઇનવર્ડ નંબર આપી, સિકકો મારી આગળની જરૂરી કાર્યવાહી અર્થે સંબંધિત શાખાના કારકુન તરફ મોકલવા મંજૂરી અર્થે સાદર રજૂ.`,
+        ch2: `વિષય: મહેકમ શાખા અંતર્ગત કર્મચારીઓની હાજરી અને કચેરી સમય પાલન બાબત.\n\nવહીવટી અધિકારીશ્રી,\n\nકચેરી કાર્યપદ્ધતિ પ્રકરણ-૨ ના નિયમ-૧૧ અને ૧૨ મુજબ, કર્મચારીશ્રી {NAME} ({ADDRESS}) ની હાજરી પત્રકમાં નિયત સમય (સવારે ૧૦:૩૦ કલાકે) બાદ ગેરહાજરી/મોડા પડવા સબબ લાલ શાહીથી ચોકડી કરી કચેરી વડા સમક્ષ મહેકમ નિયમોનુસારની શિસ્તભંગની વિધિ કરવા નોંધ સાદર રજૂ છે.`,
         
-        movement: `વિષય: અવર-જવર પત્રકમાં (Movement Register) નોંધ કરવા બાબત.\n\nકચેરી અધિક્ષકશ્રી,\n\nકચેરી કાર્યપદ્ધતિના પ્રકરણ-૨ (નિયમ-૧૩) અનુસાર, અરજદારશ્રી/કર્મચારીશ્રી {NAME}, સરનામું: {ADDRESS} સરકારી કામકાજ અથવા અલ્પાહારના નિયત સમય (૧૫ થી ૨૦ મિનિટ) માટે કચેરી બહાર જતા હોઈ, તેઓની અવર-જવર રજિસ્ટરમાં બેઠક છોડ્યા સમયની નોંધ કરવા સવિનય પ્રસ્તુત છે.`,
+        ch3: `વિષય: રજિસ્ટ્રી શાખામાં નવી આવેલ ટપાલની આવક રજિસ્ટરે નોંધણી કરવા બાબત.\n\nશાખા વડાશ્રી,\n\nઅરજદારશ્રી {NAME}, સરનામું: {ADDRESS} તરફથી કચેરીને સત્તાવાર પત્ર મળેલ છે. પ્રકરણ-૩ ના નિયમ-૨૭ મુજબ સદર ટપાલ પર ઇનવર્ડ સિકકો મારી, ક્રમાંક અંકિત કરી, વિષયવાર વર્ગીકરણ કરીને આગળની કાર્યવાહી માટે સંબંધિત ટેબલના કારકૂનને મોકલવા મંજૂરી અર્થે સાદર રજૂ છે.`,
         
-        file_movement: `વિષય: ફાઇલ નિર્ણય અર્થે ઉપરી અધિકારીશ્રી સમક્ષ રજૂ કરવા બાબત.\n\nઉચ્ચ અધિકારીશ્રી,\n\nઅરજદારશ્રી {NAME}, સરનામું: {ADDRESS} ની પડતર અરજી અંગેનો વિગતવાર અહેવાલ અને જરૂરી દસ્તાવેજો કચેરી કાર્યપદ્ધતિ પ્રકરણ-૧ (ઇ-ગવર્નન્સ અને કચેરી વ્યવસ્થાપન) ના નિયમોનુસાર ઇ-ફાઇલ માધ્યમથી તૈયાર કરવામાં આવેલ છે. સદર બાબતે યોગ્ય નિર્ણય અને આખરી આદેશ અર્થે ફાઇલ સાદર રજૂ છે.`
-    };
-
-    function generateNote() {
-        const name = document.getElementById('applicantName').value || '[અરજદારનું નામ]';
-        const address = document.getElementById('applicantAddress').value || '[અરજદારનું સરનામું]';
-        const selectedSubject = document.getElementById('subjectSelect').value;
-        const noteTextarea = document.getElementById('autoNoteContent');
-        const outputBox = document.getElementById('outputBox');
-        const notePreview = document.getElementById('notePreview');
-
-        if (!selectedSubject) {
-            noteTextarea.value = "કૃપા કરીને ઉપરથી નોંધનો વિષય પસંદ કરો જેથી અહીં ઓટોમેટીક લખાણ ટાઈપ થઈ શકે.";
-            outputBox.style.display = "none";
-            return;
-        }
-
-        // ટેમ્પલેટમાંથી ડેટા રિપ્લેસ કરવો
-        let noteText = noteTemplates[selectedSubject];
-        noteText = noteText.replace(/{NAME}/g, name).replace(/{ADDRESS}/g, address);
-
-        // ટેક્સ્ટ એરિયા અને પ્રિવ્યૂમાં લખાણ સેટ કરવું
-        noteTextarea.value = noteText;
-        notePreview.innerText = noteText;
-        outputBox.style.display = "block";
-    }
-
-    function copyToClipboard() {
-        const noteTextarea = document.getElementById('autoNoteContent');
-        noteTextarea.select();
-        document.execCommand('copy');
-        alert('નોંધ સફળતાપૂર્વક કોપી થઈ ગઈ છે! તમે તેને ગમે ત્યાં પેસ્ટ (Ctrl+V) કરી શકો છો.');
-    }
-
-    function resetForm() {
-        document.getElementById('applicantName').value = '';
-        document.getElementById('applicantAddress').value = '';
-        document.getElementById('subjectSelect').value = '';
-        document.getElementById('autoNoteContent').value = '';
-        document.getElementById('outputBox').style.display = "none";
-    }
-</script>
-
-</body>
-</html>
+        ch4: `વિષય: શાખામાં આવેલ ટપાલ વાંચન અને કાર્યપત્રક (પરિશિષ્ટ-૪) નોંધણી બાબત.\n\nસેક્શન અધિકારીશ્રી,\n\nઅરજદારશ્રી {NAME} ({ADDRESS}) ની ટપાલનું શાખા વડા દ્વારા વાંચન કરી અગ્રતા ક્રમ (તાકીદનું/જરૂરી) નક્કી કરવામાં આવેલ છે. પ્રકરણ-૪ ના નિયમ-૩૧ અને ૩૨ અનુસાર આ કાગળને સત્તાવાર કાર્યપત્રકમાં નોંધી, ૨૪ કલાકની અંદર નિકાલની પ્રક્રિયા હાથ ધરવા નોંધ સાદર છે.`,
+        
+        ch5: `વિષય: તૈયાર થયેલ પત્ર/હુકમની લખાણની જાવક (રવાનગી) પ્રક્રિયા બાબત.\n\nજાવક કારકુનશ્રી,\n\nઅરજદારશ્રી {NAME}, સરનામું: {ADDRESS} જોગ તૈયાર થયેલ સત્તાવાર પત્ર/હુકમ પર સક્ષમ અધિકારીશ્રીની સહી મેળવી લેવામાં આવી છે. પ્રકરણ-૫ ના નિયમ-૩૮ અને ૪૧ અન્વયે સદર લખાણને આઉટવર્ડ રજિસ્ટરે (પરિશિષ્ટ-૭) નોંધી, RPAD અથવા સ્પીડ પોસ્ટ મારફતે રવાના કરવા પ્રસ્તુત છે.`,
+        
+        ch6: `વિષય: નવી ફાઇલ ખોલવા અને ફાઇલ ક્રમાંક (કોડિંગ) આપવા બાબત.\n\nકચેરી અધિક્ષકશ્રી,\n\nઅરજદારશ્રી/કર્મચારીશ્રી {NAME} ({ADDRESS}) ના વિષય સબબ પ્રકરણ-૬ ના નિયમોનુસાર કચેરી ઇન્ડેક્સિંગ પદ્ધતિ મુજબ નવી ફાઇલ તૈયાર કરવામાં આવેલ છે. સદર ફાઇલને વિષયવાર સત્તાવાર નંબરો આપી કમ્પ્યુટર સિસ્ટમમાં જાળવણી કરવા મંજૂરી અર્થે સાદર રજૂ છે.`,
+        
+        ch7: `વિષય: જૂના રેકર્ડનું વર્ગીકરણ કરવા અને બિનજરૂરી તુમાર નાશ કરવા બાબત.\n\nરેકર્ડ કીપરશ્રી,\n\nકચેરી કાર્યપદ્ધતિ પ્રકરણ-૭ ના નિયમો અંતર્ગત {NAME} ({ADDRESS}) ના ટેબલ સંબંધિત રેકર્ડનું 'અ', 'બ', 'ક', 'ડ' વર્ગમાં વિભાજન કરવાનું થાય છે. સમયમર્યાદા પૂર્ણ થયેલ હોય તેવા બિનજરૂરી 'ડ' વર્ગના કાગળોને નિયત કમિટીની મંજૂરી મેળવી નાશ કરવાની મંજૂરી અર્થે સાદર રજૂ.`,
+        
